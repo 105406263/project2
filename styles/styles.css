@@ -1,0 +1,673 @@
+/* 
+  Author: Soad , simran,parveer, minaya 
+  Purpose: Apply dark theme and layout styles to website 
+*/
+
+/* =====================================
+   Section: General Reset and Body
+   ===================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+main {
+  flex: 1; /* Allows the main section to grow and fill space */
+  text-align: center;/* Centers the text inside main */
+  padding: 150px 20px 60px;
+  max-width: 800px;
+  margin: 0 auto;
+}/* =====================================
+   Section: Home Page Background Image
+   Page: index.html
+   ===================================== */
+/*  background image for the home page source:https: //storyset.com/illustration/empty-street/cuate */
+.home-page {
+  background-image: url('./images/\ street.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;/* Keeps background fixed during scroll */
+  
+}
+
+body {
+  
+    padding-top: 100px;
+    font-family: 'Inter', sans-serif;
+  color: rgb(245, 238, 238);
+  color: #f7f3f3;
+  background-color: #121212;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+/* =====================================
+   Section: Navigation Bar (All Pages)
+   ===================================== */
+/* --- NAVIGATION --- */
+.navbar {
+  position: fixed;
+  top: 0;
+
+  width: 100%;
+  background-color: #1f1f1f;
+  display: flex;
+  justify-content: space-between;/* Space between logo and nav links */
+  align-items: center;/* Vertically centers items */
+  padding: 0rem 2rem;
+  z-index: 1000;/* Keeps navbar on top of all content */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-left {
+  display: flex;/* Allows logo and brand to sit inline */
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto; /* maintains aspect ratio */
+  margin-right: 12px;
+ 
+}
+
+.brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color:#e6c24d;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;/* Space between list items */
+  
+}
+
+.nav-links li a {
+color: #e6c24d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+    color: #fff;
+}
+
+/* =====================================
+   Section: Main Hero Section
+   Page: index.html
+   ===================================== */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 40px 10px 50px;
+  background-color: rgba(0, 0, 0, 0.4);
+  
+}
+.hero-text {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #4f93ff;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+.cta-button {
+  position: relative;/* For positioning elements inside */
+  overflow: hidden;
+  background-color: #f39c12;
+  color: #000;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 6px;
+  transition: 0.4s ease;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  
+}
+
+.cta-button::after {
+  content: "→"; /* Arrow (→) symbol */
+  position: absolute;/* Positioned relative to button */
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.4s ease;/* Smooth movement */
+  font-weight: bold;
+}
+
+.cta-button:hover {
+  padding-right: 45px;
+  background-color: #e67e22;
+}
+
+.cta-button:hover::after {
+  right: 15px;
+}
+
+.about-blurb, .values, .testimonial {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+  color: #ccc;
+}
+
+.values h2 {
+  font-size: 1.6rem;
+  color: #f7f7f7;
+  margin-bottom: 15px;
+  
+}
+
+.values ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.values li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.testimonial blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #eee;
+  margin-bottom: 10px;
+}
+
+.testimonial .author {
+  font-weight: bold;
+  color: #f39c12;
+}
+
+
+/* =====================================
+   Section: Footer
+   ===================================== */
+
+
+footer {
+  background-color: #000;
+  color: #f39c12;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #f39c12;
+  /* Match the footer text color */
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #fff;
+  /* Optional: add hover effect for better UX */
+}
+
+/* ===== STYLES FOR jobs.html PAGE ) ===== */
+/* --- JOB PAGE LAYOUT --- */
+.jobs-page {
+  background-color: #121212;
+  padding: 100px 20px 60px;
+}
+
+.job-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+}
+
+.job-card {
+  text-align: left;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.job-info {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.job-info h2 {
+  color: #4f93ff;
+  font-size: 2rem;
+  margin-bottom: 10px;
+ 
+}
+
+.job-info h3 {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #f39c12;
+  text-align: left;
+}
+
+.job-info p,
+.job-info li {
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.6;
+  margin: 5px 0;
+  text-align: left;
+}
+
+.job-info ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.job-details {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 260px;
+  color: #fff;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.job-details p {
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.cta-button {
+  background-color: #f39c12;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e67e22;
+  color: #fff;
+}
+
+/* Style the aside box */
+aside {
+  width: 25%;
+  float: right;
+  background-color: #222;
+  border: 1px solid #4f93ff;
+  padding: 15px;
+  margin: 20px;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+/* Section spacing for job descriptions */
+section {
+  margin-bottom: 60px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Job headings */
+section h2 {
+  font-size: 2rem;
+  color: #4f93ff;
+  margin-bottom: 10px;
+}
+
+/* Lists inside job sections */
+section ul,
+section ol {
+  text-align: left;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+section li {
+  margin-bottom: 8px;
+  color: #ccc;
+}
+
+/* Subheadings inside each job section */
+section h3 {
+  font-size: 1.2rem;
+  color: #ddd;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+/* Paragraphs inside job sections */
+section p {
+  margin: 10px 0;
+  color: #ccc;
+}
+
+/* ===== STYLES FOR about.html PAGE ===== */
+
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* Style student IDs on the right side */
+/* Right-align the entire student IDs section */
+section:nth-of-type(2) {
+  text-align: right;
+  margin-left: auto;
+  width: 40%;
+  padding-right: 20px;
+}
+
+/* Right-align the heading specifically */
+section:nth-of-type(2) h2 {
+  display: inline-block;
+  margin-bottom: 10px;
+  text-align: left;
+  width: 100%;
+}
+
+/* Style the list */
+section:nth-of-type(2) ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+/* List items styling */
+section:nth-of-type(2) li {
+  padding: 5px 0;
+  font-size: 1.1rem;
+}
+
+
+/* Style the figure with border and float right */
+figure {
+  float: right;
+  margin: 0 0 20px 20px;
+  border: 3px solid #3498db; /* Short-hand border property */
+  padding: 5px;
+  max-width: 30%; /* Adjust as needed */
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+figcaption {
+  text-align: center;
+  font-style: italic;
+  padding: 5px;
+}
+
+/* Clear float after figure */
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style tables to be centered */
+table {
+  margin: 20px auto; /* Centers the table */
+  border-collapse: collapse;
+  width: 80%; /* Adjust width as needed */
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Table headings in bold */
+th {
+  font-weight: bold;
+  background-color: #f4e731;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  text-align: left;
+}
+
+/* Table cells with hex background color */
+td {
+  padding: 10px;
+  background-color: #000000; 
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect for table rows */
+tr:hover td {
+  background-color: #3186c3; 
+  transition: background-color 0.3s ease;
+}
+
+/* Caption styling */
+caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+/* ===== STYLES FOR apply.html PAGE  ===== */
+
+/* Learned about the animation through https://css-tricks.com/  and used it*/
+/*It gives the form a animated appearence*/
+form {
+  animation: fadeIn 0.8s ease-out forwards;/* Triggers fade-in animation when form appears. */
+  opacity: 0;  /* Starts fully transparent, will animate to visible. */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;/* Final state: fully visible */
+    transform: translateY(0); /* Final position: default */
+  }
+  from {
+    opacity: 0;/* Initial state: invisible */
+    transform: translateY(20px);/* Initial position: 20px lower */
+  }
+}
+
+
+/* Learned about the animation through https://css-tricks.com/  and used it*/
+/* It gives animation to h1*/
+h1 {
+  opacity: 0; /* Start invisible */
+  transform: translateY(20px);
+  animation: slideUp 1.5s ease-out forwards; /* Slide and fade into place */
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);/* Return to normal position */
+  }
+  
+}
+
+form {
+
+  max-height: 700px;  /* It sets maximum heught of the form */
+  
+/* Learned about the scrolling through https://css-tricks.com/   */
+  overflow-y: auto;  /* It enables scrolling in the form if height of the form exceeds max-height */
+ 
+  /* Styling of the form */
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px;
+  border: 2px solid #0e0f0f;
+  border-radius: 12px;
+  background-color:#e6c24d;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    color: #000000;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1rem;
+  animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+
+/* It styles the label element of the form */
+form label {
+  display: block; /* Allows  only label to be shown here */
+  margin-top: 15px; /* Separates it from previous input*/
+  margin-bottom: 6px;/* Separates it from input field*/
+  font-weight: bold;
+  color: #000;
+}
+
+/* Styles the specific components of the form */
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="date"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+    background-color: #ffffff;
+      color: #000;
+  font-size: 1rem;
+}
+
+/* Learned about the animation through https://css-tricks.com/  and used it*/
+/*It gives the form a animated appearence*/
+form {
+  animation: fadeIn 0.8s ease-out forwards;/* Triggers fade-in animation when form appears. */
+  opacity: 0;  /* Starts fully transparent, will animate to visible. */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;/* Final state: fully visible */
+    transform: translateY(0); /* Final position: default */
+  }
+  from {
+    opacity: 0;/* Initial state: invisible */
+    transform: translateY(20px);/* Initial position: 20px lower */
+  }
+}
+
+/* Learned about the animation through https://css-tricks.com/  and used it*/
+/* It gives animation to h1*/
+h1 {
+  font: 900 3rem/1.3 "Segoe UI", sans-serif;
+    margin-bottom: 20px;
+    color: #ffffff;
+  opacity: 0; /* Start invisible */
+  transform: translateY(20px);
+  animation: slideUp 1.5s ease-out forwards; /* Slide and fade into place */
+}
+
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);/* Return to normal position */
+  }
+  
+}
+
+/*Gives color to differnt form inputs placeholder*/
+form input[type="text"]::placeholder,
+form input[type="email"]::placeholder,
+form input[type="tel"]::placeholder {
+  
+    color: #444;
+}
+
+/*Styles the fieldset*/
+fieldset {
+  margin-top: 20px;
+  border: 1px solid #4f93ff;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #ffffff;
+}
+
+/*Styles the legend*/
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+
+/*Adds spacing between input and label text*/
+form input[type="radio"],
+form input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.1);
+}
+
+/*Allows the textarea to be resized vertically only. Not breaking it horizontally*/
+form textarea {
+  resize: vertical;
+}
+
+/*Enhances the submit and reset buttons*/
+form input[type="submit"],
+form input[type="reset"] {
+  background-color: #f39c12;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 25px;/* Adds space between buttons and previous element. */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;/* Prevents line breaks between buttons. */
+  margin-right: 10px;
+}
+
+/*Changes the color of buttons if we hover upon them*/
+form input[type="submit"]:hover,
+form input[type="reset"]:hover {
+  background-color: #e67e22;
+}
