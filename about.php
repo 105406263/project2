@@ -16,23 +16,8 @@
 
 <body class="about-page">
     <!-- Header and Navigation Bar -->
-    <header class="navbar">
-        <div class="nav-left">
-            <!-- Company Logo --> <!-- Company Name -->
-            <img src="images/logo.png" alt="TechEmpower Logo" class="logo"> 
-            <span class="brand">TechEmpower</span>
-        </div>
-
-        <!-- Navigation menu-->
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobs.html">Jobs</a></li>
-            <li><a href="apply.html">Apply</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="mailto:info@techempower.com.au">Email Us</a></li> <!-- Email link -->
-            <li><a href="https://github.com/105406263/project1" target="_blank">GitHub</a></li> <!-- External link to GitHub -->
-        </ul>
-    </header>
+    <?php include("header.inc"); ?>
+    <?php include("nav.inc"); ?>
 
     <!-- Group information section -->
     <section>
@@ -178,11 +163,7 @@
 
     <div style="clear: both;"></div>
     <!-- Footer Section -->
-    <footer>
-        <p>© 2025 TechEmpower. All rights reserved. 
-            <!-- Jira Project Link -->
-            <a href="https://soadmahdi9.atlassian.net/jira/software/projects/TWP/summary" target="_blank">View our Jira Project</a>
-        </p>
-    </footer>
+    <?php include("footer.inc"); ?>
+    
 </body>
 </html>
