@@ -51,19 +51,32 @@
         <dl>
             <dt><strong><em>Soad</em></strong></dt>
             <dd>Designed the Home page for TechEmpower and assigned tasks in Jira (including making the GitHub repository
-                for the project with necessary files).</dd>
+                for the project with necessary files). 
+                
+                To get started on the second part of the project, 
+                she used PHP to reuse common elements in our website and also created a file called "setttings.php" to store the database connection variables. 
+                To further assist our website, she created a file called "enhancemnets.php"b and contributed towards the final presentation slides.</dd>
 
             <dt><strong><em>Simran</em></strong></dt>
             <dd>Designed the About page for TechEmpower and reviewed the final website before submission (assigned to be
-                the meeting facilitator and reviewing any necessary documents).</dd>
+                the meeting facilitator and reviewing any necessary documents). 
+                
+                For the second part of the project, she updated the contribution section on the about page 
+                and created the Jobs Table where she stored job descriptions in a database table and creted the HTML dynamically by PHP. She also contributed towards the final presentation slides.</dd>
 
             <dt><strong><em>Parveer</em></strong></dt>
             <dd>Designed the Job Application page for TechEmpower and was responsible for tracking progress and ensuring
-                that everyone is up to date.</dd>
+                that everyone is up to date. 
+                
+                For the second part of the project, she created an Expressions Of Interest (EOI) table in the MySQL database and
+                further added validated records by using the "process_eoi.php" file. She also contributed towards the final presentation slides. </dd>
 
             <dt><strong><em>Minaya</em></strong></dt>
             <dd>Designed the Job Description page for TechEmpower and was responsible for ensuring that all group
-                communications are documented in Discord.</dd>
+                communications are documented in Discord. 
+                
+                For the second Part of the project, she created a "manage.php" web page that allows a manager to make querires using the EOI table and
+                have in return, have a page with appropriate results. She also contributed towards the final presentation slides.</dd>
         </dl>
     </section>
 
