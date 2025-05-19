@@ -1,5 +1,10 @@
-<?php include("header.inc"); ?>
-<?php include("nav.inc"); ?>
+<?php
+$page_title = "Home | TechEmpower Careers";
+$body_class = "home-page";
+include("header.inc");
+include("nav.inc");
+
+?>
 
 <main class="hero-text">
   <h1><span class="highlight">Empowering</span> Your Future in Tech</h1>

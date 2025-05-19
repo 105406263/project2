@@ -79,6 +79,12 @@ body {
   font-size: 1.2rem;
   color:#e6c24d;
 }
+.nav-links a.active {
+  text-decoration: underline;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 
 .nav-links {
   list-style: none;
@@ -130,7 +136,9 @@ h1 {
 
 .subtitle {
   font-size: 1.2rem;
-  color: #ddd;
+  color: #ffffff; 
+  background-color: rgba(0, 0, 0, 0.6); /* Slight dark background */
+  
 }
 
 .cta-button {

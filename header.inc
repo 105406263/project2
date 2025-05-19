@@ -11,11 +11,17 @@
     <meta name="author" content="Soad" />
     <meta
       name="keywords"
-      content="TechEmpower, Careers, IT Jobs, Innovation, Cybersecurity, Support Roles, Web Project"
+      content="TechEmpower, Software Development, IT Careers, Job Applications, Web Design, Software Jobs, Tech Roles"
     />
-    <title>TechEmpower | Careers</title>
+
+    <title>
+      <?php echo isset($page_title) ? $page_title : "TechEmpower Careers"; ?>
+    </title>
+
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
 
-  <body class="home-page"></body>
+  <body
+    class="<?php echo isset($body_class) ? $body_class : 'default'; ?>"
+  ></body>
 </html>
