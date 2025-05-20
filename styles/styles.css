@@ -502,6 +502,7 @@ caption {
 /* Learned about the animation through https://css-tricks.com/  and used it*/
 /*It gives the form a animated appearence*/
 form {
+  
   animation: fadeIn 0.8s ease-out forwards;/* Triggers fade-in animation when form appears. */
   opacity: 0;  /* Starts fully transparent, will animate to visible. */
 }
@@ -535,7 +536,7 @@ h1 {
 }
 
 form {
-
+  text-align: left;
   max-height: 700px;  /* It sets maximum heught of the form */
   
 /* Learned about the scrolling through https://css-tricks.com/   */
@@ -639,6 +640,7 @@ fieldset {
 
 /*Styles the legend*/
 legend {
+  text-align:center ;
   padding: 0 10px;
   font-weight: bold;
   color: #1a1a1a;
