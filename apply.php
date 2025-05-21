@@ -28,7 +28,7 @@
       <select id="jobref" name="jobref" required>
         <option value="">--Select a Job Reference--</option>
         <option value="CYB01">CYB01</option>
-        <option value="ITT02">UID03</option>
+        <option value="ITT02">ITT02</option>
       </select>
 
       <!--Input for First Name-->
