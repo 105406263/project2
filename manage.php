@@ -4,10 +4,7 @@ if (!isset($_SESSION['username'])) {
   header("Location: login.php");
   exit();
 }
-?>
 
-<?php
-session_start();
 require_once("settings.php");
 
 // Connect to DB
@@ -32,7 +29,51 @@ if (!$conn) {
 
 <main>
   <h1>Manage Expressions of Interest (EOIs)</h1>
-  <p>Use the form below to manage job applications submitted by users.</p>
+  <p>Use the forms below to manage job applications submitted by users.</p>
+
+  <!-- SORT FORM -->
+  <section>
+    <h2>Sort EOIs</h2>
+    <form method="get" action="manage.php">
+      <label for="sort_by">Sort EOIs by:</label>
+      <select name="sort_by" id="sort_by">
+        <option value="EOInumber">EOI Number</option>
+        <option value="jobRef">Job Reference</option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="email">Email</option>
+        <option value="status">Status</option>
+      </select>
+      <input type="submit" name="sort" value="Sort">
+    </form>
+
+    <?php
+    if (isset($_GET["sort"])) {
+      $valid_fields = ['EOInumber', 'jobRef', 'firstName', 'lastName', 'email', 'status'];
+      $sortBy = in_array($_GET["sort_by"], $valid_fields) ? $_GET["sort_by"] : 'EOInumber';
+
+      $query = "SELECT * FROM eoi ORDER BY $sortBy";
+      $result = mysqli_query($conn, $query);
+
+      if ($result && mysqli_num_rows($result) > 0) {
+        echo "<h3>Sorted EOIs:</h3><table border='1' cellpadding='8'>";
+        echo "<tr><th>EOI #</th><th>Job Ref</th><th>Name</th><th>Email</th><th>Status</th></tr>";
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<tr>
+                  <td>{$row['EOInumber']}</td>
+        <td>{$row['JobReferenceNumber']}</td>
+        <td>{$row['FirstName']} {$row['LastName']}</td>
+        <td>{$row['Emailaddress']}</td>
+        <td>{$row['status']}</td>
+                </tr>";
+        }
+        echo "</table>";
+      } else {
+        echo "<p>No EOIs found for sorting.</p>";
+      }
+    }
+    ?>
+  </section>
 
   <!-- SEARCH FORM -->
   <section>
@@ -55,60 +96,73 @@ if (!$conn) {
       $jobRef = trim($_POST["job_ref"]);
       $firstName = trim($_POST["first_name"]);
       $lastName = trim($_POST["last_name"]);
-
+    
       $query = "SELECT * FROM eoi WHERE 1=1";
-      if (!empty($jobRef)) $query .= " AND jobRef LIKE '%$jobRef%'";
-      if (!empty($firstName)) $query .= " AND firstName LIKE '%$firstName%'";
-      if (!empty($lastName)) $query .= " AND lastName LIKE '%$lastName%'";
-
+      if (!empty($jobRef)) $query .= " AND JobReferenceNumber LIKE '%$jobRef%'";
+      if (!empty($firstName)) $query .= " AND FirstName LIKE '%$firstName%'";
+      if (!empty($lastName)) $query .= " AND LastName LIKE '%$lastName%'";
+    
       $result = mysqli_query($conn, $query);
+    
       if ($result && mysqli_num_rows($result) > 0) {
-        echo "<h3>Results:</h3><table border='1' cellpadding='8'>";
+        echo "<h3>Search Results:</h3><table border='1' cellpadding='8'>";
         echo "<tr><th>EOI #</th><th>Job Ref</th><th>Name</th><th>Email</th><th>Status</th></tr>";
         while ($row = mysqli_fetch_assoc($result)) {
           echo "<tr>
                   <td>{$row['EOInumber']}</td>
-                  <td>{$row['jobRef']}</td>
-                  <td>{$row['firstName']} {$row['lastName']}</td>
-                  <td>{$row['email']}</td>
+                  <td>{$row['JobReferenceNumber']}</td>
+                  <td>{$row['FirstName']} {$row['LastName']}</td>
+                  <td>{$row['Emailaddress']}</td>
                   <td>{$row['status']}</td>
                 </tr>";
         }
         echo "</table>";
       } else {
-        echo "<p>No EOIs found.</p>";
+        echo "<p>No EOIs found matching your criteria.</p>";
       }
     }
+    
     ?>
   </section>
 
   <!-- UPDATE STATUS -->
   <section>
-    <h2>Update EOI Status</h2>
-    <form method="post" action="manage.php">
-      <label for="eoi_num">EOI Number:</label>
-      <input type="text" name="eoi_num" id="eoi_num"><br><br>
-      
-      <label for="new_status">New Status:</label>
-      <input type="text" name="new_status" id="new_status"><br><br>
-      
-      <input type="submit" name="update" value="Update Status">
-    </form>
+  <h2>Update EOI Status</h2>
+  <form method="post" action="manage.php">
+    <label for="eoi_num">EOI Number:</label>
+    <input type="text" name="eoi_num" id="eoi_num"><br><br>
+    
+    <label for="new_status">New Status:</label>
+    <input type="text" name="new_status" id="new_status"><br><br>
+    
+    <input type="submit" name="update" value="Update Status">
+  </form>
 
-    <?php
-    if (isset($_POST["update"])) {
-      $eoiNum = trim($_POST["eoi_num"]);
-      $newStatus = trim($_POST["new_status"]);
-      if (!empty($eoiNum) && !empty($newStatus)) {
-        $updateQuery = "UPDATE eoi SET status='$newStatus' WHERE EOInumber=$eoiNum";
-        $updateResult = mysqli_query($conn, $updateQuery);
-        echo $updateResult ? "<p>Updated EOI #$eoiNum to status '$newStatus'.</p>" : "<p>Error updating record.</p>";
+  <?php
+  if (isset($_POST["update"])) {
+    $eoiNum = trim($_POST["eoi_num"]);
+    $newStatus = trim($_POST["new_status"]);
+
+    if (!empty($eoiNum) && !empty($newStatus)) {
+      $updateQuery = "UPDATE eoi SET status = '$newStatus' WHERE EOInumber = $eoiNum";
+      $updateResult = mysqli_query($conn, $updateQuery);
+
+      if ($updateResult) {
+        if (mysqli_affected_rows($conn) > 0) {
+          echo "<p style='color: green;'> Status updated: EOI #$eoiNum → '$newStatus'</p>";
+        } else {
+          echo "<p style='color: orange;'> No rows updated. EOI #$eoiNum may not exist or status is already '$newStatus'.</p>";
+        }
       } else {
-        echo "<p>Please provide both EOI number and new status.</p>";
+        echo "<p style='color: red;'> Error running update query.</p>";
       }
+    } else {
+      echo "<p style='color: red;'> Please provide both EOI number and new status.</p>";
     }
-    ?>
-  </section>
+  }
+  ?>
+</section>
+
 
   <!-- DELETE EOI -->
   <section>
