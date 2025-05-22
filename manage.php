@@ -1,5 +1,13 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: login.php");
+  exit();
+}
+?>
+
+<?php
+session_start();
 require_once("settings.php");
 
 // Connect to DB
