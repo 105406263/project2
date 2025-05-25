@@ -1,19 +1,25 @@
 <?php
+//This code makes the page unable to be accessed by the  URL. It redirects the user to apply page if they try to visit the page using URL
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: apply.php");
     exit();
 }
+
+//It enables error reporting
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
 <?php
-require_once("settings.php");
+require_once("settings.php");  //Connection to the database
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
 if (!$conn) {
     echo "<p>Database connection failed: " . mysqli_connect_error() . "</p>";
 }
 
+//checks if eoi table exists if not it creates it
+// Asked Chatgpt how to check if they table is there and if not how to create it. It answered with this command "CREATE TABLE IF NOT EXISTS
 $table_sql = "CREATE TABLE IF NOT EXISTS EOI (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT,
     `JobReferenceNumber` varchar(5) NOT NULL,
@@ -32,11 +38,12 @@ $table_sql = "CREATE TABLE IF NOT EXISTS EOI (
     `Status` enum('New','Current','Final','') NOT NULL DEFAULT 'New',
     PRIMARY KEY (`EOInumber`)
 )";
+
 mysqli_query($conn, $table_sql);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    //  Collect and sanitise form inputs
+    // sanitise form inputs
      $jobref = sanitise_input($_POST["jobref"]);
     $firstname= sanitise_input($_POST["firstname"]);
     $lastname = sanitise_input($_POST["lastname"]);
@@ -55,13 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $birthdate = sanitise_input($_POST["birthdate"]);
 
       
-    
-
-    //  Basic form validation
+     //  Basic form validation
+     //Asked Chatgpt to make the patterns in php code 
     $errors = [];
     if (empty($jobref)) $errors[] = "Job reference is required.";
     if (!preg_match("/^[A-Za-z\s]{1,20}$/", $firstname)) $errors[] = "First name must be alphabetic and up to 20 characters.";
-    if (!preg_match("/^[A-Za-z]{1,20}$/", $lastname)) $errors[] = "Last name must be alphabetic and up to 20 characters.";
+    if (!preg_match("/^[A-Za-z\s]{1,20}$/", $lastname)) $errors[] = "Last name must be alphabetic and up to 20 characters.";
     if (!preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $birthdate)) $errors[] = "Invalid date of birth format.";
     if (!in_array($gender, ["male", "female", "other"])) $errors[] = "Invalid gender selected.";
     if (strlen($address) > 40 ) $errors[] = "Invalid address format.";
@@ -75,10 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($skills) < 1) $errors[] = "Please select at least one skill.";
     if (in_array("Other", $skills) && empty($otherskills)) $errors[] = "Please specify other skills.";
     
+  // if any errors are there it prints them and stop otherwise it inserts data into the EOI table  
  if (!empty($errors)) {
        
         foreach ($errors as $error) {
-            echo "<p style='color:red;'>" . htmlspecialchars($error) . "</p>";
+            echo "<p>" . htmlspecialchars($error) . "</p>";
         }
         echo "<p><strong>Please go back and fix the errors.</strong></p>";
     } else {
@@ -87,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES ('$jobref', '$firstname', '$lastname', '$address', '$suburb', '$state', '$postcode', '$email', '$phone', '$skill1', '$skill2', '$skill3', '$otherskills')";
                 
 
-        
+        ////after inserting it shows confirmation
         if (mysqli_query($conn, $sql)) {
             $eoinumber = mysqli_insert_id($conn);
             echo "<h2>Thank you for your application!</h2>";
@@ -103,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<p><strong>Skills:</strong> " . htmlspecialchars(implode(", ", $skills)). "</p>";
             echo "<p><strong>Other Skills:</strong> " . nl2br(htmlspecialchars($otherskills)) . "</p>";
         } else {
-            echo "<p style='color:red;'>Error: " . mysqli_error($conn) . "</p>";
+            echo "<p>Error: " . mysqli_error($conn) . "</p>";
         }
     }
 
