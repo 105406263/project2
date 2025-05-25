@@ -10,7 +10,7 @@
     <meta name="author" content="Simran">
     <meta name="keywords" content="TechEmpower Team, Group Project, About Us, HTML Group, Student Contributions">
 
-    <title>About Our Group</title>
+    <title>About Page</title>
     <link rel="stylesheet" href="styles/styles.css"> <!-- External CSS stylesheet -->
 </head>
 
