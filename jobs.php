@@ -18,10 +18,11 @@
     <?php include("nav.inc"); ?>
 
     <main class="job-container">
-
+        
         <h1>Job Descriptions</h1>
 
         <?php
+        // Used DeepSeek AI to change structure of the job.php file to dynamically pull data from the databse
         // Database connection
         require_once 'settings.php';
         $conn = new mysqli($host, $user, $pwd, $sql_db);
