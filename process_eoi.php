@@ -14,6 +14,26 @@ if (!$conn) {
     echo "<p>Database connection failed: " . mysqli_connect_error() . "</p>";
 }
 
+$table_sql = "CREATE TABLE IF NOT EXISTS EOI (
+    `EOInumber` int(11) NOT NULL AUTO_INCREMENT,
+    `JobReferenceNumber` varchar(5) NOT NULL,
+    `FirstName` varchar(50) NOT NULL,
+    `LastName` varchar(50) NOT NULL,
+    `Streetaddress` varchar(40) NOT NULL,
+    `Suburb` varchar(40) NOT NULL,
+    `State` varchar(50) NOT NULL,
+    `Postcode` varchar(4) NOT NULL,
+    `Emailaddress` varchar(100) NOT NULL,
+    `Phonenumber` varchar(12) NOT NULL,
+    `Skill1` varchar(50) DEFAULT NULL,
+    `Skill2` varchar(50) DEFAULT NULL,
+    `Skill3` varchar(50) DEFAULT NULL,
+    `Otherskills` text DEFAULT NULL,
+    `Status` enum('New','Current','Final','') NOT NULL DEFAULT 'New',
+    PRIMARY KEY (`EOInumber`)
+)";
+mysqli_query($conn, $table_sql);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //  Collect and sanitise form inputs
