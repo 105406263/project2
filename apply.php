@@ -88,17 +88,20 @@
 
       <!--Checkbox inputs for skills selectiom-->
       <fieldset>
-        <legend>Technical Skills </legend>
-        <label for="HTML"><input type="checkbox" name="skills[]" value="HTML" id="HTML" checked > HTML</label>
-        <label for="CSS"><input type="checkbox" name="skills[]" value="CSS" id="CSS"> CSS</label>
-        <label for="JavaScript"><input type="checkbox" name="skills[]" value="JavaScript" id="JavaScript"> JavaScript</label>
-        <label for="others"><input type="checkbox" name="skills[]" value="Other"> Other</label>
+        <legend>Technical Skills</legend>
+        <input type="checkbox" name="skills[]" value="HTML" id="HTML" checked>
+        <label for="HTML">HTML</label>
+        <input type="checkbox" name="skills[]" value="CSS" id="CSS">
+        <label for="CSS">CSS</label>
+        <input type="checkbox" name="skills[]" value="JavaScript" id="JavaScript">
+        <label for="JavaScript">JavaScript</label>
+        <input type="checkbox" name="skills[]" value="Other" id="otherSkill">
+        <label for="otherSkill">Other</label>
       </fieldset>
 
-      <!--TextArea for other skills-->
+      
       <label for="otherskills">Other Skills:</label>
-      <textarea id="otherskills" name="otherskills" rows="10" cols="50"></textarea>
-
+      <textarea id="otherskills" name="otherskills" rows="10" cols="50" placeholder="List other relevant skills..."></textarea>
       <!--Submit button for the form-->
       <input type="submit" value="Apply">
 
