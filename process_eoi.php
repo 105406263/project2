@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit();
 }
 error_reporting(E_ALL);
-ini_set('display_error', 1);
+ini_set('display_errors', 1);
 ?>
 <?php
 require_once("settings.php");
@@ -60,15 +60,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //  Basic form validation
     $errors = [];
     if (empty($jobref)) $errors[] = "Job reference is required.";
-    if (!preg_match("/^[A-Za-z]{1,20}$/", $firstname)) $errors[] = "First name must be alphabetic and up to 20 characters.";
+    if (!preg_match("/^[A-Za-z\s]{1,20}$/", $firstname)) $errors[] = "First name must be alphabetic and up to 20 characters.";
     if (!preg_match("/^[A-Za-z]{1,20}$/", $lastname)) $errors[] = "Last name must be alphabetic and up to 20 characters.";
-    if (strlen($address) > 40 ) $errors[] = "Invalid address format.";
-    if (empty($birthdate)) $errors[] = "Date of birth is required.";
+    if (!preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $birthdate)) $errors[] = "Invalid date of birth format.";
     if (!in_array($gender, ["male", "female", "other"])) $errors[] = "Invalid gender selected.";
-    if (!preg_match("/^[A-Za-z\s]+$/", $suburb)) $errors[] = "Suburb must be alphabetic only.";
-    if (!in_array($state, ["VIC", "NSW", "QLD", "NT", "WA", "SA", "TAS", "ACT"])) $errors[] = "Invalid state.";
-    if (!preg_match("/^\d{4}$/", $postcode)) $errors[] = "Postcode must be exactly 4 digits.";
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email format.";
+    if (strlen($address) > 40 ) $errors[] = "Invalid address format.";
+    if (empty($suburb) || strlen($suburb) > 40) $errors[] = "Suburb is required and max 40 chars.";
+    if (!in_array($state, ["ACT", "NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"])) $errors[] = "Invalid state.";
+    if (!preg_match("/^\d{4}$/", $postcode)) {$errors[] = "Postcode must be exactly 4 digits.";
+    } else {  $postcode_num = (int)$postcode;
+    if ($postcode_num < 200 || $postcode_num > 9944) {$errors[] = "Postcode must be between 0200 and 9944.";}}
+    if (!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) $errors[] = "Invalid email address.";
     if (!preg_match("/^[0-9\s]{8,12}$/", $phone)) $errors[] = "Phone must be 8 to 12 digits/spaces.";
     if (count($skills) < 1) $errors[] = "Please select at least one skill.";
     if (in_array("Other", $skills) && empty($otherskills)) $errors[] = "Please specify other skills.";
