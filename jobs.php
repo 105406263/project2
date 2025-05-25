@@ -21,68 +21,70 @@
 
         <h1>Job Descriptions</h1>
 
-        <!-- Job 1 -->
-        <section class="job-card">
-            <div class="job-info">
-                <h2>Cybersecurity Specialist</h2>
-                <p><strong>Ref:</strong> CYB01</p>
-                <p><strong>Location:</strong> Melbourne, VIC</p>
-                <p><strong>Employment Type:</strong> Full-time</p>
-                <h3>Overview</h3>
-                <p>Join TechEmpower to protect digital assets and implement robust cybersecurity solutions...</p>
-                <h3>Responsibilities</h3>
-                <ul>
-                    <li>Monitor and respond to security alerts and incidents.</li>
-                    <li>Conduct vulnerability assessments and risk analysis.</li>
-                    <li>Ensure compliance with internal policies and external regulations.</li>
-                </ul>
-                <h3>Qualifications</h3>
-                <ul>
-                    <li><strong>Essential:</strong> Bachelor's in Cybersecurity, 2+ years experience...</li>
-                    <li><strong>Preferable:</strong> CISSP certification, experience with AWS security tools.</li>
-                </ul>
-            </div>
+        <?php
+        // Database connection
+        require_once 'settings.php';
+        $conn = new mysqli($host, $user, $pwd, $sql_db);
+        
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        // Get all active jobs
+        $sql = "SELECT * FROM jobs WHERE is_active = 1 ORDER BY posted_date DESC";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                // Convert responsibilities and qualifications to arrays
+                $responsibilities = explode("\n", $row['responsibilities']);
+                $qualifications = explode("\n", $row['qualifications']);
+                ?>
+                
+                <!-- Job listing -->
+                <section class="job-card">
+                    <div class="job-info">
+                        <h2><?php echo htmlspecialchars($row['title']); ?></h2>
+                        <p><strong>Ref:</strong> <?php echo htmlspecialchars($row['ref_code']); ?></p>
+                        <p><strong>Location:</strong> <?php echo htmlspecialchars($row['location']); ?></p>
+                        <p><strong>Employment Type:</strong> <?php echo htmlspecialchars($row['employment_type']); ?></p>
+                        <h3>Overview</h3>
+                        <p><?php echo htmlspecialchars($row['overview']); ?></p>
+                        <h3>Responsibilities</h3>
+                        <ul>
+                            <?php foreach($responsibilities as $item): ?>
+                                <?php if(trim($item) !== ''): ?>
+                                    <li><?php echo htmlspecialchars(trim($item)); ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                        <h3>Qualifications</h3>
+                        <ul>
+                            <?php foreach($qualifications as $item): ?>
+                                <?php if(trim($item) !== ''): ?>
+                                    <li><?php echo htmlspecialchars(trim($item)); ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
 
-            <aside class="job-details">
-                <p><strong>Salary:</strong><br> $85,000 – $110,000 AUD</p>
-                <p><strong>Contact:</strong><br> careers@techempower.com.au</p>
-                <p><strong>Reports to:</strong><br> IT Security Manager</p>
-                <p><strong>Posted:</strong><br> 10 April 2025</p>
-                <a href="apply.php" class="cta-button">Apply for this job</a>
-            </aside>
-        </section>
-
-        <!-- Job 2 -->
-        <section class="job-card">
-            <div class="job-info">
-                <h2>UI/UX Designer</h2>
-                <p><strong>Ref:</strong> UID03</p>
-                <p><strong>Location:</strong> Melbourne, VIC</p>
-                <p><strong>Employment Type:</strong> Full-time</p>
-                <h3>Overview</h3>
-                <p>TechEmpower is seeking a creative and user-focused UI/UX Designer...</p>
-                <h3>Responsibilities</h3>
-                <ul>
-                    <li>Conduct user research and usability testing.</li>
-                    <li>Create wireframes, prototypes, and high-fidelity designs.</li>
-                    <li>Collaborate with developers to implement user-centered designs.</li>
-                    <li>Maintain and evolve the design system and brand guidelines.</li>
-                </ul>
-                <h3>Qualifications</h3>
-                <ul>
-                    <li><strong>Essential:</strong> Experience with Figma or Adobe XD, strong design portfolio...</li>
-                    <li><strong>Preferable:</strong> Knowledge of HTML/CSS, familiarity with Agile environments.</li>
-                </ul>
-            </div>
-
-            <aside class="job-details">
-                <p><strong>Salary:</strong><br> $70,000 – $90,000 AUD</p>
-                <p><strong>Contact:</strong><br> designcareers@techempower.com.au</p>
-                <p><strong>Reports to:</strong><br> Product Design Lead</p>
-                <p><strong>Posted:</strong><br> 14 April 2025</p>
-                <a href="apply.php" class="cta-button">Apply for this job</a>
-            </aside>
-        </section>
+                    <aside class="job-details">
+                        <p><strong>Salary:</strong><br><?php echo htmlspecialchars($row['salary_range']); ?></p>
+                        <p><strong>Contact:</strong><br><?php echo htmlspecialchars($row['contact_email']); ?></p>
+                        <p><strong>Reports to:</strong><br><?php echo htmlspecialchars($row['reports_to']); ?></p>
+                        <p><strong>Posted:</strong><br><?php echo date('d F Y', strtotime($row['posted_date'])); ?></p>
+                        <a href="apply.php?job_id=<?php echo $row['id']; ?>" class="cta-button">Apply for this job</a>
+                    </aside>
+                </section>
+                
+                <?php
+            }
+        } else {
+            echo '<p>No job openings at this time. Please check back later.</p>';
+        }
+        
+        $conn->close();
+        ?>
 
     </main>
 
