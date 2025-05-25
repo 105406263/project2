@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($jobref)) $errors[] = "Job reference is required.";
     if (!preg_match("/^[A-Za-z\s]{1,20}$/", $firstname)) $errors[] = "First name must be alphabetic and up to 20 characters.";
     if (!preg_match("/^[A-Za-z\s]{1,20}$/", $lastname)) $errors[] = "Last name must be alphabetic and up to 20 characters.";
-    if (!preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $birthdate)) $errors[] = "Invalid date of birth format.";
+    if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $birthdate)) $errors[] = "Invalid date of birth format.";
     if (!in_array($gender, ["male", "female", "other"])) $errors[] = "Invalid gender selected.";
     if (strlen($address) > 40 ) $errors[] = "Invalid address format.";
     if (empty($suburb) || strlen($suburb) > 40) $errors[] = "Suburb is required and max 40 chars.";
