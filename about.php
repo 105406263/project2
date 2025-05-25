@@ -18,6 +18,7 @@
     <!-- Header and Navigation Bar -->
     <?php include("header.inc"); ?>
     <?php include("nav.inc"); ?>
+    <h1> About Page </h1>
 
     <!-- Group information section -->
     <section>
